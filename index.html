@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naše Svatba</title>
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Styles */
+        body {
+            scroll-behavior: smooth;
+            font-family: 'DM Serif Text', cursive;
+            background-color: #fff;
+        }
+
+
+        header {
+            background-color: #fff;
+            text-align: center;
+            padding: 0px 0;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .webCard {
+            display: none;
+            /* max-width: 100%;
+            height: auto; */
+        }
+
+        /* .parallax {
+            height: 600px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        } */
+
+        /* .parallax {
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+    }
+
+    .parallax img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        transform: translateY(0);
+        will-change: transform;
+        transition: transform 0.2s ease-out;
+    } */
+
+        .parallax {
+            position: relative;
+            height: 400px;
+            /* Výška sekce */
+            overflow: hidden;
+        }
+
+        .parallax img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Obrázek vyplní celou výšku sekce */
+            object-fit: cover;
+            /* Obrázek bude oříznut tak, aby pokryl celý kontejner */
+            object-position: center;
+            /* Střed obrázku bude zachován */
+            transform: translateY(0);
+            will-change: transform;
+            transition: transform 0.2s ease-out;
+        }
+
+        /* .hradistek {
+            background-image: url('https://www.krasnoupalavou.cz/photos/hradistek-522.jpg');
+        }
+
+        .madlik {
+            background-image: url('https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A3515.JPG');
+        }
+
+        .ozvetese {
+            background-image: url('https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A1432.JPG');
+        }
+
+        .ubytko {
+            background-image: url('https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A1581.JPG');
+        } */
+
+
+
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #749a86;
+            text-align: center;
+        }
+
+        footer {
+            background: #749a86;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .side-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .side-nav a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: #bd7f60;
+            color: #eceae3;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .side-nav a:hover {
+            background: #a34618;
+            transform: translateY(-3px);
+        }
+
+        .menu-icon {
+            display: block;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            font-size: 30px;
+            background: #749a86;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .side-nav-mobile {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-nav-mobile a {
+            color: #eceae3;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            text-decoration: none;
+            background: #749a86;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .side-nav-mobile a:hover {
+            background: #FFA500;
+            transform: translateY(-3px);
+        }
+
+        .mail-menu {
+            width: 50%;
+            height: auto;
+        }
+
+        @media (min-width: 768px) {
+            .mobileCard {
+                display: none;
+            }
+
+            .mail-menu {
+                width: 25%;
+                height: auto;
+            }
+
+            .parallax {
+                position: relative;
+                height: 600px;
+                /* Výška sekce */
+                overflow: hidden;
+            }
+
+            .parallax img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+                /* Obrázek vyplní celou výšku sekce */
+                object-fit: scale-down;
+                /* Obrázek bude oříznut tak, aby pokryl celý kontejner */
+                object-position: center;
+                /* Střed obrázku bude zachován */
+                transform: translateY(0);
+                will-change: transform;
+                transition: transform 0.2s ease-out;
+            }
+
+
+            section {
+                padding: 100px;
+                overflow: hidden;
+            }
+
+            .webCard {
+                display: inline;
+                height: 100vh;
+                width: auto;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+
+            .side-nav {
+                display: block;
+            }
+        }
+
+        .mapa {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Icon -->
+    <div class="menu-icon" onclick="toggleMobileMenu()">☰</div>
+
+    <!-- Side Navigation -->
+    <div class="side-nav d-none d-md-block">
+        <a href="#kdy-kde">Kdy a Kde</a>
+        <a href="#program">Program</a>
+        <!-- <a href="#outfit">Outfit</a> -->
+        <a href="#ubytovani">Ubytování</a>
+        <!-- <a href="#zabava">Zábava</a> -->
+        <a href="#kontakt">Kontakt</a>
+    </div>
+
+    <!-- Mobile Side Navigation -->
+    <div class="side-nav-mobile d-md-none" id="mobileMenu">
+        <a href="#kdy-kde" onclick="toggleMobileMenu()">Kdy a Kde</a>
+        <a href="#program" onclick="toggleMobileMenu()">Program</a>
+        <!-- <a href="#outfit" onclick="toggleMobileMenu()">Outfit</a> -->
+        <a href="#ubytovani" onclick="toggleMobileMenu()">Ubytování</a>
+        <!-- <a href="#zabava" onclick="toggleMobileMenu()">Zábava</a> -->
+        <a href="#kontakt" onclick="toggleMobileMenu()">Kontakt</a>
+        <a href="javascript:void(0);" onclick="toggleMobileMenu()" style="color: black;">Skrýt Menu</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <img class="webCard" src="card.png" alt="Svatební obrázek">
+        <img class="mobileCard" src="mobile.png" alt="Svatební obrázek">
+        <!-- <h1 class="display-4">Naše Svatba</h1>
+        <p class="lead">Srdečně vás zveme na náš velký den!</p> -->
+    </header>
+
+    <!-- Parallax Section -->
+    <!-- <div class="parallax"></div> -->
+
+    <!-- Main Content -->
+    <main class="container my-5 my-padding">
+        <section id="kdy-kde" class="mb-5">
+            <!-- <h3>S láskou vám oznamujeme, že spojíme své životy v jeden.</h3> -->
+            <h2 class="section-title">Kdy a Kde</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Obřad:</h3>
+                    <p><strong>Datum:</strong> 12. července 2025</p>
+                    <p><strong>Čas:</strong> 12:00</p>
+                    <p><strong>Místo:</strong> Hradištěk u Velkých Bílovic</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Pokračovat budeme:</h3>
+                    <p><strong>Místo:</strong> Vinařství U Madla, Velké Bílovice</p>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col-md-12 mapa">
+                    <!-- <iframe style="border:none" src="https://en.frame.mapy.cz/s/dujujejoha" width="400" height="280"
+                        frameborder="0"></iframe> -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.101115397306!2d16.908010699999995!3d48.85628219999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712d673fc4e37f3%3A0xe8c4bfc555afcf56!2zU3RhbmlzbGF2IE3DoWRsIC0gVsOhxaEgdmluYcWZ!5e0!3m2!1sen!2scz!4v1736350879857!5m2!1sen!2scz"
+                        width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            </br>
+            <p>
+                S pozvánkami se za váma samozřejmě stavíme osobně.
+            </p>
+            <h4>Budeme rádi, když tento výjimečný den strávíte s námi!</h4>
+        </section>
+
+        <!-- Parallax Section -->
+        <!-- <div class="parallax hradistek"></div> -->
+        <div class="parallax">
+            <img src="https://www.krasnoupalavou.cz/photos/hradistek-522.jpg" alt="Parallax obrázek">
+        </div>
+
+        <section id="program" class="mb-5">
+            <h2 class="section-title">Program</h2>
+            <h4>
+                Milí hosté,
+                máme pro vás nachystaný program, co voní vínem a dobrou náladou. Pojďte s námi prožít tento krásný den!
+                🌿🍷
+            </h4>
+
+            </br />
+            <p>
+                🔔 12:00 – Obřad na Hradišťku</br>
+                V poledne sa potkáme na Hradišťku, kde si řekneme své „ano“ pod širým nebem.
+            </p>
+
+            <p>
+                🚗 Po obřadu – Přesun do vinařství Mádl</br>
+                Po slzách dojetí sa přesuneme tam, kde začíná ta pravá moravská zábava. Čeká vás pohostinnost Mádlova
+                vinařství a celý den plný dobrého vína a veselí.
+            </p>
+
+
+            <p>
+                🎶 Cimbálka a degustace</br>
+                Cimbálová muzika vám zahraje pěkně od srdca, a kdo bude chtět, může zavítat do sklípku na ochutnávku
+                Mádlových pokladů. A že jich tam majú!
+            </p>
+
+            <p>
+                🍷 Večer – Sklípek a DJ</br>
+                Kdo nezapadne do sklípku, ten rozhodně nesmí promeškat večerní tancovačku. V pozdějších hodinách nás
+                rozproudí DJ, co bude hrát, dokud nevydrží poslední tanečník.
+            </p>
+
+            <p>
+                Tak přijďte s dobrou náladou, nechajte starosti doma a připravte sa na den plný radosti, hudby a
+                moravského vína! 🍇💃
+            </p>
+
+            <h4>
+                Těšíme sa na vás!
+                Novomanželé 😊
+            </h4>
+
+            <!-- <ul class="list-group list-group-flush">
+                <li class="list-group-item">14:00 - Obřad</li>
+                <li class="list-group-item">15:30 - Přípitek a focení</li>
+                <li class="list-group-item">17:00 - Slavnostní večeře</li>
+                <li class="list-group-item">19:00 - Hudba a tanec</li>
+            </ul> -->
+        </section>
+
+        <!-- Parallax Section -->
+        <!-- <div class="parallax"></div>
+
+        <section id="outfit" class="mb-5">
+            <h2 class="section-title">Outfit</h2>
+            <p>Dress code: Formální oblečení. Pánové prosíme oblek, dámy společenské šaty.</p>
+        </section> -->
+
+        <!-- Parallax Section -->
+        <!-- <div class="parallax madlik"></div> -->
+        <div class="parallax">
+            <img src="https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A3515.JPG"
+                alt="Parallax obrázek">
+        </div>
+
+        <section id="ubytovani" class="mb-5">
+            <h2 class="section-title">Ubytování</h2>
+            <!-- <h3>Pro rodinu</h3> -->
+            <p>
+                Milí přátelé,
+
+                pro rodinu jsme zařídili ubytování, ale aktuálně zůstaly volné pouze větší pokoje pro více osob v
+                podkroví se společným sociálním zařízením(při obsazení min. 15 osob). Pokud by měl někdo zájem, dejte
+                nám prosím vědět.
+
+                5 pokojů v podkroví hotelu: 3 čtyřlůžkové, 1 desetilůžkový a 1 osmilůžkový
+                Cena: 650 Kč/lůžko se snídaní
+                Pokud máte zájem, dejte nám prosím vědět co nejdříve.
+            </p>
+            <p>
+                Pokud byste chtěli spíš klid a soukromí, můžete využít hotely v okolí Velkých Bílovic – každý podle
+                svého vkusu. Přímo v sousedství Vinařství Mádl se nacházejí:
+
+                Rodinné Vinařství Skoupil – Útulné prostředí s výhledem na vinice přímo v sousedství Mádlů, kde se spolu shledáme.
+                Sklep 38 – Moderní ubytování opět přímo v sousedství Mádlů.
+
+                Vyberte si podle svého gusta, ve Velkých Bílovicích je spousta dalších možností ubytování.
+
+                Těšíme se, až se spolu potkáme! 🍷🎉
+            </p>
+
+            <!-- <p>
+                Hotel Mádl nabízí celkem 12 pokojů.
+            </p>
+            <p>
+                Dvoulůžkový pokoj s možností dvou přistýlek
+                Pokoj s vlastním sociálním zařízením, televizí, ledničkou, Wi-Fi připojením a možností až 2
+                osob na přistýlce.
+            </p>
+            <p>
+                Další možností je ubytování v podkroví hotelu se nachází pět pokojů – 3 čtyřlůžkové, 1 desetilůžkový a 1
+                osmilůžkový. Sociální zařízení společné.
+            </p>
+
+            <h2>Volné kapacity:</h2>
+            </br>
+            <p>Pokoj 2 dospělí max 2 děti.</p>
+            <p>11/12 volno</p>
+            </br>
+            <p>Pokoj čtyřlůžkový</p>
+            <p>3/3 volno</p>
+            </br>
+            <p>Pokoj 1 desetilůžkový</p>
+            <p>1/1 volno</p>
+            </br>
+            <p>1 osmilůžkový</p>
+            <p>1/1 volno</p>
+            </br>
+
+
+            <p>
+                Milí hosté,
+
+                abychom všem co nejvíce usnadnili organizaci a zajistili pohodlí, ubytování budeme rezervovat podle
+                pořadí, v jakém se nám ozvete. Doporučujeme tedy co nejdříve potvrdit svou účast a zájem o ubytování,
+                abychom vám mohli vyhovět.
+            </p> -->
+        </section>
+
+
+        <!-- Parallax Section -->
+        <!-- <div class="parallax ubytko"></div> -->
+        <div class="parallax">
+            <img src="https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A1581.JPG"
+                alt="Parallax obrázek">
+        </div>
+
+        <section id="kontakt" class="mb-5">
+            <h2 class="section-title">Kontakt</h2>
+            <p>Pro jakékoliv dotazy se nám určitě ozvěte!.</p>
+            <!-- <p>Pro jakékoliv dotazy se nám určitě ozvěte telefonicky nebo na mail.</p> -->
+            <!-- <img src="./mail.png" alt="Popis obrazku" class="mail-menu"> -->
+        </section>
+    </main>
+
+    <!-- Parallax Section -->
+    <!-- <div class="parallax ozvetese"></div> -->
+    <div class="parallax">
+        <img src="https://www.stavby-vinarny.cz/wp-content/gallery/hotel-a-vinarstvi-madl/EA7A1432.JPG"
+            alt="Parallax obrázek">
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Naše Svatba.</p>
+        <p class="small" style="font-size: xx-small;">
+            "Všechny použité fotografie jsou duševním vlastnictvím jejich autorů a jsou zde použity pouze za účelem
+            prezentace."
+        </p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+                menu.style.flexDirection = 'column';
+                menu.style.justifyContent = 'center';
+                menu.style.alignItems = 'center';
+            }
+        }
+
+        document.addEventListener('scroll', () => {
+            const parallaxSections = document.querySelectorAll('.parallax img');
+            const scrollPosition = window.pageYOffset;
+
+            parallaxSections.forEach((parallaxImage) => {
+                const sectionOffset = parallaxImage.parentElement.offsetTop;
+                const speed = 0.8; // Adjust parallax speed
+                const yOffset = (scrollPosition - sectionOffset) * speed + 200;
+                parallaxImage.style.transform = `translateY(${yOffset}px)`;
+            });
+        });
+
+    </script>
+</body>
+
+</html>
